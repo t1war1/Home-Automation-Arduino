@@ -26,6 +26,12 @@ $(function() {
         socket.emit('other-rooms-lights', $("#other-rooms-light").val());
         //console.log($("#other-rooms-btn").val());
     });
+
+    $("#backyard-btn").click(()=>{
+        changeBtnState("#backyard-btn","#backyard-light");
+        socket.emit('backyard-light');
+    })
+
     // Checks for events sent from arduino to change the living room or every other rooms because of a pushbutton or photoresistor
     socket.on('living-room-light-pushbutton', function() { changeBtnState("#living-room-btn", "#living-room-light") });
     socket.on('backyard-light-change', function(value) {

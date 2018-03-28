@@ -50,6 +50,15 @@ io.sockets.on('connection', function(socket) {
         other_rooms_light_pin_led.toggle();
     });
 
+    socket.on('backyard-light',(data)=>{
+        if(backyard_light) {
+            backyard_light_pin.high();
+        }
+        else {
+            backyard_light_pin.low();
+        }
+    })
+
     // Corrupted security!
     socket.on('corrupted-security', function() {
         securityOn('Counting people outgoing the house when no people was supposed to be in');
