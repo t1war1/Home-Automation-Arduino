@@ -131,7 +131,7 @@ arduino.on("ready", function() {
     living_room_light_pin_led.off();
     // Check if photoresistor gets less than a half of light available and change living room light if applicable
     photoresistor.on('data', function() {
-        //console.log(this.scaleTo([0, 100]));
+        console.log(this.scaleTo([0, 100]));
         if((this.scaleTo([0, 100]) < 40) && !security){
             living_room_light = !living_room_light;
             living_room_light_pin_led.on();
@@ -149,7 +149,7 @@ arduino.on("ready", function() {
         living_room_light = !living_room_light;
         living_room_light_pin_led.toggle();
         io.sockets.emit('living-room-light-pushbutton', null);
-        //console.log('living-room-light-pushbutton');
+        console.log('living-room-light-pushbutton');
     });
 
     //////////////////////////////// OTHER ROOMS ////////////////////////////////
@@ -162,7 +162,7 @@ arduino.on("ready", function() {
         other_rooms_light = !other_rooms_light;
         other_rooms_light_pin_led.toggle();
         io.sockets.emit('other-rooms-change');
-        //console.log('other-rooms-change');
+        console.log('other-rooms-change');
     });
 
     ////////////////////////////// FAN CONTROLLING WITH TEMPERATURE MEASURING ////////////////////////////////
@@ -177,7 +177,7 @@ arduino.on("ready", function() {
     // Whenever temperature provided by LM35 sensor is greater than 22° C the fan input changes its value to 'high' and when temperature is less or equal to 22° C it goes 'low'
     temperature.on("data", function () {
         io.sockets.emit('temperature', this.celsius.toFixed(2));
-        //console.log('temperature: ' + this.celsius.toFixed(2));
+        console.log('temperature: ' + this.celsius.toFixed(2));
         if((this.celsius > 28.00) && !security) {
             fan_pin.high();
         }
