@@ -123,7 +123,7 @@ arduino.on("ready", function() {
     // Check if photoresistor gets less than a half of light available and change living room light if applicable
     photoresistor.on('data', function() {
         //console.log(this.scaleTo([0, 100]));
-        if((this.scaleTo([0, 100]) < 60) && !security){
+        if((this.scaleTo([0, 100]) < 40) && !security){
             living_room_light = !living_room_light;
             living_room_light_pin_led.on();
             io.sockets.emit('photoresistor-on');
