@@ -4,4 +4,4 @@
 - Libraries used: socket.io, jquery, johnny-five.js
 - Hardware: Arduino
 
-> Use Standard firmata library.
+> Use Standard firmata library in Arduino Code.
