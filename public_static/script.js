@@ -14,6 +14,13 @@ $(()=>{
         }
     });
 
+    socket.on('photoresistor-status',(data)=>{
+        if(data.status==='on')
+            living_room_button.text('Turn off');
+        else
+            living_room_button.text('Turn on');
+
+    })
 
 
 
