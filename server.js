@@ -21,7 +21,6 @@ board.on('ready',()=>{
         pin: "A0",
         freq: 250
     });
-
     photoresistor.on('data',function(){
         if(this.scaleTo([0,100])<40)
         {
@@ -37,7 +36,7 @@ board.on('ready',()=>{
             });
         }
     })
-
+    photoresistor.disable();
 
 });
 
@@ -47,6 +46,13 @@ io.on('connection',(socket)=>{
     living_room_led.toggle();
     });
 
+    socket.on('disable-photoresistor',(data)=>{
+        photoresistor.disable();
+    });
+
+    socket.on('enable-photoresistor',(data)=>{
+        photoresistor.enable();
+    });
 
 });
 
