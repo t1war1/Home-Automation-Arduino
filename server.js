@@ -18,11 +18,11 @@ board.on('ready',()=>{
     living_room_led.off();
 
     photoresistor=new five.Sensor({
-        pin: "A2",
+        pin: "A0",
         freq: 250
     });
 
-    photoresistor.on('data',()=>{
+    photoresistor.on('data',function(){
         if(this.scaleTo([0,100])<40)
         {
             living_room_led.on();
