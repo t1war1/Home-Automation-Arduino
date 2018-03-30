@@ -11,18 +11,17 @@ const board=five.Board();
 app.use(express.static(path.join(__dirname,'public_static')));
 
 
-var living_room_led, photoresistor,control_pin;
+var living_room_led, photoresistor;
 
 board.on('ready',()=>{
     living_room_led=new five.Led(13);
     living_room_led.off();
 
-    control_pin=new five.Pin(12);
-
     photoresistor=new five.Sensor({
         pin: "A0",
         freq: 250
     });
+
     photoresistor.on('data',function(){
         if(this.scaleTo([0,100])<40)
         {
@@ -38,15 +37,7 @@ board.on('ready',()=>{
             });
         }
     })
-    photoresistor.disable();
 
-    control_pin.on('low',function () {
-        photoresistor.disable();
-    });
-
-    control_pin.on('high',function () {
-        photoresistor.enable();
-    })
 
 });
 
@@ -56,13 +47,6 @@ io.on('connection',(socket)=>{
     living_room_led.toggle();
     });
 
-    socket.on('disable-photoresistor',(data)=>{
-        control_pin.write(0);
-    });
-
-    socket.on('enable-photoresistor',(data)=>{
-        control_pin.write(1);
-    });
 
 });
 
