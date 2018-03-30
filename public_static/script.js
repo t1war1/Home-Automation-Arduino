@@ -33,13 +33,17 @@ $(()=>{
     });
 
     socket.on('photoresistor-status',(data)=>{
-        if(data.status==='on') {
-            bulb.text('ON');
-            living_room_button.text('Turn off');
-        }
-        else {
-            bulb.text('OFF');
-            living_room_button.text('Turn on');
+        if(control_variable===1) {
+            if(data.status==='on') {
+                bulb.text('ON');
+                console.log("on");
+                living_room_button.text('Turn off');
+            }
+            else {
+                bulb.text('OFF');
+                console.log("off");
+                living_room_button.text('Turn on');
+            }
         }
 
     })
